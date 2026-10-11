@@ -1,0 +1,69 @@
+{
+  "best_model": {
+    "model": "XGBoost",
+    "accuracy": 0.9469,
+    "precision": 0.8095,
+    "recall": 0.7907,
+    "f1": 0.8,
+    "roc_auc": 0.9793,
+    "confusion_matrix": [
+      [
+        269,
+        8
+      ],
+      [
+        9,
+        34
+      ]
+    ]
+  },
+  "rf_metrics": {
+    "model": "RandomForest",
+    "accuracy": 0.9406,
+    "precision": 0.8158,
+    "recall": 0.7209,
+    "f1": 0.7654,
+    "roc_auc": 0.9725,
+    "confusion_matrix": [
+      [
+        270,
+        7
+      ],
+      [
+        12,
+        31
+      ]
+    ]
+  },
+  "xgb_metrics": {
+    "model": "XGBoost",
+    "accuracy": 0.9469,
+    "precision": 0.8095,
+    "recall": 0.7907,
+    "f1": 0.8,
+    "roc_auc": 0.9793,
+    "confusion_matrix": [
+      [
+        269,
+        8
+      ],
+      [
+        9,
+        34
+      ]
+    ]
+  },
+  "feature_names": [
+    "rainfall_last_3h",
+    "rainfall_last_24h",
+    "rainfall_last_72h",
+    "forecast_rainfall_24h",
+    "max_hourly_rainfall",
+    "slope",
+    "elevation",
+    "distance_to_river",
+    "road_density",
+    "historical_incident_count",
+    "active_verified_reports"
+  ]
+}

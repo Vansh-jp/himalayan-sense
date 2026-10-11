@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: himalayasense_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespassword
+      POSTGRES_DB: himalayasense
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d himalayasense"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: himalayasense_backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql+psycopg://postgres:postgrespassword@db:5432/himalayasense
+      - JWT_SECRET=dev_jwt_secret_key_himalayasense_uttarakhand_secure_2026
+      - OPEN_METEO_BASE_URL=https://api.open-meteo.com/v1
+      - UPLOAD_DIR=./uploads
+      - FRONTEND_URL=http://localhost:5173
+    volumes:
+      - ./backend/uploads:/app/uploads
+
+volumes:
+  postgres_data:
